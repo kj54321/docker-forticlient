@@ -1,8 +1,7 @@
 FROM alpine:latest
 
 RUN apk add --no-cache iproute2 ppp ppp-daemon bash expect file libc6-compat libgcc libstdc++ \
-    && apk add --update openssl \
-    && mkdir -p /lib64 \
+    && apk add --update openssl 
 
 WORKDIR /opt
 
