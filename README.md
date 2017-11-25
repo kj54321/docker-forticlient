@@ -29,19 +29,26 @@ docker create --name forticlient forticlient:latest \
 
 ```bash
 # Create a docker network, to be able to control addresses
-docker network create --subnet=172.20.0.0/16 fortinet
+docker network create --subnet=172.16.0.0/28 \
+                      --opt com.docker.network.bridge.name=myvpn \
+                      --opt com.docker.network.bridge.enable_icc=true \
+                      --opt com.docker.network.bridge.enable_ip_masquerade=true \
+                      --opt com.docker.network.bridge.host_binding_ipv4=0.0.0.0 \
+                      --opt com.docker.network.driver.mtu=9001 \
+                      myvpn
 
 # Start the priviledged docker container with a static ip
-docker run -it --rm \
+docker run -d --rm \
   --privileged \
-  --net fortinet --ip 172.20.0.2 \
+  --net myvpn --ip 172.16.0.3 \
   -e VPNADDR=host:port \
   -e VPNUSER=me@domain \
   -e VPNPASS=secret \
-  auchandirect/forticlient
+  --name yourname \
+  forticlient
 
 # Add route for you remote subnet (ex. 10.201.0.0/16)
-ip route add 10.201.0.0/16 via 172.20.0.2
+ip route add 10.201.0.0/16 via 172.16.0.3
 
 # Access remote host from the subnet
 ssh 10.201.8.1
@@ -65,7 +72,7 @@ docker run -it --rm \
   -e VPNADDR=host:port \
   -e VPNUSER=me@domain \
   -e VPNPASS=secret \
-  auchandirect/forticlient
+  forticlient
 
 # Add route for you remote subnet (ex. 10.201.0.0/16)
 sudo route add -net 10.201.0.0/16 $(docker-machine ip fortinet)
