@@ -12,8 +12,7 @@ RUN wget 'https://tianyublog.com/res/forticlient.tar.gz' -O forticlient-sslvpn.t
     && tar -xzf forticlient-sslvpn.tgz \
     && rm -rf forticlient-sslvpn.tgz \
     && bash forticlient/helper/setup.linux.sh 2 \
-    && echo -n 'debug dump\n\
-lock\n\
+    && echo -n 'lock\n\
 noauth\n\
 proxyarp\n\
 nodefaultroute\n\
