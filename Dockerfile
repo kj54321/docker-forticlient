@@ -1,8 +1,11 @@
 FROM alpine:latest
+MAINTAINER Donny Jie <dong115@uwindsor.ca>
+LABEL version="0.1"
+LABEL description="Forticlient in docker"
 
 # Install dependency
-RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
-    && apk add --no-cache ca-certificates wget iproute2 ppp ppp-daemon bash expect file libgcc libstdc++ gcompat@testing 
+RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
+    && apk add --no-cache ca-certificates wget iproute2 ppp ppp-daemon bash expect file libgcc libstdc++ gcompat@community 
     
 
 WORKDIR /opt
@@ -21,7 +24,8 @@ modem\n\
 noipdefault\n\
 lcp-echo-interval 60\n\
 lcp-echo-failure 4\n\
-' > /etc/ppp/options
+' > /etc/ppp/options \
+    && rm -rf /var/cache/apk/* /tmp/*
 
 # Copy runfiles
 COPY forticlient /usr/bin/forticlient
