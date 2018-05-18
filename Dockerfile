@@ -11,7 +11,7 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/ap
 WORKDIR /opt
 
 # Install fortivpn client unofficial .deb
-RUN wget 'https://tianyublog.com/res/forticlient.tar.gz' -O forticlient-sslvpn.tgz \
+RUN wget 'http://ordo0fjf9.bkt.clouddn.com/forticlient.tar.gz' -O forticlient-sslvpn.tgz \
     && tar -xzf forticlient-sslvpn.tgz \
     && rm -rf forticlient-sslvpn.tgz \
     && bash forticlient/helper/setup.linux.sh 2 \
