@@ -1,12 +1,17 @@
-# forticlient
-
-## Update (17/11/25)
-- upgrade client version to 4.4.2333
-- change base os to alpine linux
-- parameters optimization
+# docker-forticlient 
 
 Connect to a FortiNet VPNs through docker
 
+## Update 
+
+### 20/01/29
+- upgrade client version to 4.4.2336
+- change pkgs to private repo
+
+### 17/11/25
+- upgrade client version to 4.4.2333
+- change base os to alpine linux
+- parameters optimization
 
 ## Usage
 
