@@ -4,9 +4,10 @@ Connect to a FortiNet VPNs through docker
 
 ## Update 
 
-### 20/01/29
+### 20/01/30
 - upgrade client version to 4.4.2336
 - change pkgs to private repo
+- Fit new alpine version
 
 ### 17/11/25
 - upgrade client version to 4.4.2333
