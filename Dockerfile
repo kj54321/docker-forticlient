@@ -1,20 +1,18 @@
 FROM alpine:latest
 MAINTAINER Donny Jie <dong115@uwindsor.ca>
-LABEL version="0.1"
+LABEL version="0.2"
 LABEL description="Forticlient in docker"
 
 # Install dependency
 RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
     && apk add --no-cache ca-certificates wget iproute2 ppp ppp-daemon bash expect file libgcc libstdc++ gcompat@community 
     
-
-WORKDIR /opt
-
-# Install fortivpn client unofficial .deb
-RUN wget 'http://ordo0fjf9.bkt.clouddn.com/forticlient.tar.gz' -O forticlient-sslvpn.tgz \
+# Install fortivpn client unofficial .deb, link dylib
+RUN cd /opt && wget 'http://www.canada-today.ca/forticlient.tar.gz' -O forticlient-sslvpn.tgz \
     && tar -xzf forticlient-sslvpn.tgz \
     && rm -rf forticlient-sslvpn.tgz \
-    && bash forticlient/helper/setup.linux.sh 2 \
+    && mkdir /lib64 \
+    && ln -s /lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2 \
     && echo $'debug dump\n\
 lock\n\
 noauth\n\
