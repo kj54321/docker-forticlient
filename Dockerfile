@@ -5,7 +5,7 @@ LABEL description="Forticlient in docker"
 
 # Install dependency
 RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    && apk add --no-cache ca-certificates wget iproute2 ppp ppp-daemon bash expect file libgcc libstdc++ gcompat@community 
+    && apk add --no-cache ca-certificates wget iproute2 ppp ppp-daemon bash expect file libgcc libstdc++ musl-obstack gcompat@community 
     
 # Install fortivpn client unofficial .deb, link dylib
 RUN cd /opt && wget 'http://www.canada-today.ca/forticlient.tar.gz' -O forticlient-sslvpn.tgz \
